@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  node-app:
+    build: 
+      context: /app
+      dockerfile: Dockerfile
+    image: otot-a1-3-node-app
+  
+  reverse-proxy:
+    build:
+      context: /nginx
+      dockerfile: Dockerfile
+    image: otot-a1-3-reverse-proxy
+    ports:
+      - "3000:80"
+    depends_on: 
+      - node-app
+    restart: always
